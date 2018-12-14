@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  description: "Santa Api"
+  version: "1.0.0"
+  title: "Secret Msg"
+host: "localhost:80"
+paths:
+  /messages:
+    post:
+      operationId: addMessage
+      description: Adds a message
+      tags:
+        - Messages
+      parameters: 
+        - name: payload
+          in: body
+          required: true
+          description: Payload
+          schema:
+            $ref: '#/definitions/Message'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Message'
+    get:
+      operationId: getMessages
+      description: Gets all the messages
+      tags:
+        - Messages
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Message'
+  
+definitions:
+  Message:
+    type: object
+    properties:
+      id:
+        type: string
+        readOnly: true
+      message:
+        type: string
+      dateTime:
+        type: string
+        format: datetime
